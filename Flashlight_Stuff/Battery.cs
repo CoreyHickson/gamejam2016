@@ -16,6 +16,7 @@ public class Battery : MonoBehaviour {
 // Used to affect the odds of flashlight flicker
 	private float random;
 
+	public Transform blue;
 
 	void Start () {
 		GetComponent<Light> ().intensity = 0.0f;
@@ -52,6 +53,7 @@ public class Battery : MonoBehaviour {
 		if (isOn || isFlicker) {
 			StartCoroutine(BattBurn());
 		}
+		blue.localScale = new Vector3(1.0f, (1.3f*(battLife / 100)), 1.0f);
 	}
 
 
@@ -71,7 +73,6 @@ public class Battery : MonoBehaviour {
 // BattBurn controls the diminishing battery life
 	IEnumerator BattBurn () {
 		battLife -= battRate * Time.deltaTime;
-		Debug.Log (battLife);
 		yield return new WaitForSeconds(0.1f);
 	}
 }
